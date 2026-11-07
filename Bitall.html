@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bitall</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<!-- Toggles globales para overlays (checkbox hack, sin JS).
+     Radios: un solo chat abierto a la vez; chat-off los cierra. -->
+<input class="tog" type="radio" name="bitall-chat" id="chat-off" checked aria-hidden="true">
+<input class="tog" type="radio" name="bitall-chat" id="chat-helena" aria-hidden="true">
+<input class="tog" type="radio" name="bitall-chat" id="chat-marco" aria-hidden="true">
+<input class="tog" type="radio" name="bitall-chat" id="chat-rosa" aria-hidden="true">
+<input class="tog" type="radio" name="bitall-chat" id="chat-catedral" aria-hidden="true">
+<input class="tog" type="radio" name="bitall-chat" id="chat-luz" aria-hidden="true">
+<input class="tog" type="checkbox" id="tog-pedido-helena" aria-hidden="true">
+<input class="tog" type="checkbox" id="tog-pedido-marco" aria-hidden="true">
+<input class="tog" type="checkbox" id="tog-pedido-rosa" aria-hidden="true">
+<input class="tog" type="checkbox" id="tog-pedido-catedral" aria-hidden="true">
+<input class="tog" type="checkbox" id="tog-pedido-luz" aria-hidden="true">
+
+<!-- =====================================================================
+     PANTALLAS PÚBLICAS (a pantalla completa, sin menú)
+     ===================================================================== -->
+
+<!-- ========== Landing ========== -->
+<section class="panel public" id="landing">
+  <div class="landing-hero"><div class="landing-art" aria-hidden="true"></div></div>
+  <div class="landing-actions">
+    <div class="logo"><span class="logo-mark" aria-hidden="true"></span>Bitall</div>
+    <a class="btn" href="#registro">Comenzar</a>
+    <a class="btn btn-white" href="#login">Iniciar sesión</a>
+  </div>
+</section>
+
+<!-- ========== Login ========== -->
+<section class="panel public" id="login">
+  <a class="back-link mobile-only" href="#landing"><span class="icon i-back" aria-hidden="true"></span> Volver</a>
+  <form class="auth-card" action="#inicio" method="get">
+    <a class="logo" href="#landing"><span class="logo-mark" aria-hidden="true"></span>Bitall</a>
+    <div class="auth-row">
+      <label for="login-nombre">Nombre</label>
+      <input id="login-nombre" name="nombre" autocomplete="username">
+    </div>
+    <div class="auth-row">
+      <label for="login-pass">Contraseña</label>
+      <input id="login-pass" name="pass" type="password" autocomplete="current-password">
+    </div>
+    <button class="btn btn-wide" type="submit">Iniciar</button>
+    <a class="link-soft" href="#registro">Crear cuenta</a>
+  </form>
+</section>
+
+<!-- ========== Registro ========== -->
+<section class="panel public" id="registro">
+  <a class="back-link mobile-only" href="#landing"><span class="icon i-back" aria-hidden="true"></span> Volver</a>
+  <form class="auth-card" action="#roles" method="get">
+    <a class="logo" href="#landing"><span class="logo-mark" aria-hidden="true"></span>Bitall</a>
+    <div class="auth-row">
+      <label for="reg-nombre">Nombre</label>
+      <input id="reg-nombre" name="nombre" autocomplete="name">
+    </div>
+    <div class="auth-row">
+      <label for="reg-correo">Correo</label>
+      <input id="reg-correo" name="correo" type="email" autocomplete="email">
+    </div>
+    <div class="auth-row">
+      <label for="reg-pass">Contraseña</label>
+      <input id="reg-pass" name="pass" type="password" autocomplete="new-password">
+    </div>
+    <button class="btn btn-wide" type="submit">Crear cuenta</button>
+    <a class="link-soft" href="#login">Ya tengo cuenta</a>
+  </form>
+</section>
+
+<!-- ========== Roles: Usuario / Vendedor ========== -->
+<section class="panel public" id="roles">
+  <div class="roles-grid">
+    <a class="role-card" href="#inicio">
+      <span class="role-bun" aria-hidden="true"></span>
+      <h2>Usuario</h2>
+      <p class="hide-mobile">Encuentra productos y negocios cerca de ti de una manera fácil y rápida. Explora diferentes categorías, consulta precios, revisa opiniones y descubre nuevos lugares. También puedes guardar tus favoritos, contactar con vendedores y realizar pedidos para recogerlos o recibirlos a domicilio.</p>
+      <p class="mobile-only">Encuentra productos y negocios cerca de ti. Explora categorías, precios, opiniones y haz pedidos.</p>
+      <span class="btn">Entrar como comprador</span>
+    </a>
+    <a class="role-card" href="#inicio">
+      <span class="role-bun" aria-hidden="true"></span>
+      <h2>Vendedor</h2>
+      <p class="hide-mobile">Da a conocer tu negocio y llega a más personas cerca de ti. Publica tus productos, precios, fotos y disponibilidad, administra tu inventario y recibe pedidos. También puedes actualizar la información de tu negocio y mantener contacto directo con tus clientes.</p>
+      <p class="mobile-only">Publica productos, administra pedidos y mantén contacto con tus clientes del barrio.</p>
+      <span class="btn">Entrar como vendedor</span>
+    </a>
+  </div>
+  <a class="back-fab" href="#registro" aria-label="Volver"><span class="icon i-back" aria-hidden="true"></span><span class="back-text">Volver</span></a>
+</section>
+
+
+<!-- =====================================================================
+     APP (menú único + vistas)
+     Móvil: topbar arriba y barra inferior · Tablet: riel lateral
+     Escritorio: sidebar completo.  Todo el cambio lo hace el CSS.
+     ===================================================================== -->
+<div class="app">
+
+  <!-- Topbar: solo se ve en móvil -->
+  <header class="topbar">
+    <a class="logo" href="#inicio"><span class="logo-mark" aria-hidden="true"></span>Bitall</a>
+    <div class="actions">
+      <a class="icon-btn" href="#usuarios" aria-label="Vendedores"><span class="icon i-user" aria-hidden="true"></span></a>
+      <label class="icon-btn" for="chat-helena" aria-label="Mensajes"><span class="icon i-chat" aria-hidden="true"></span></label>
+    </div>
+  </header>
+
+  <!-- Menú: barra inferior (móvil) / riel (tablet) / sidebar (escritorio) -->
+  <nav class="sidebar" aria-label="Principal">
+    <a class="logo" href="#inicio"><span class="logo-mark" aria-hidden="true"></span><span class="logo-text">Bitall</span></a>
+    <div class="nav">
+      <a class="nb" href="#inicio"><span class="icon i-home" aria-hidden="true"></span><span>Inicio</span></a>
+      <a class="nb nb-extra" href="#categorias"><span class="icon i-grid" aria-hidden="true"></span><span>Categorías</span></a>
+      <a class="nb" href="#favoritos"><span class="icon i-heart" aria-hidden="true"></span><span>Favoritos</span></a>
+      <a class="nb" href="#pedidos"><span class="icon i-bag" aria-hidden="true"></span><span class="lbl-full">Mis pedidos</span><span class="lbl-short">Pedidos</span></a>
+      <a class="nb nb-extra" href="#usuarios"><span class="icon i-user" aria-hidden="true"></span><span>Usuarios</span></a>
+      <a class="nb end" href="#config"><span class="icon i-gear" aria-hidden="true"></span><span class="lbl-full">Configuración</span><span class="lbl-short">Config</span></a>
+    </div>
+  </nav>
+
+  <main class="views">
+
+  <!-- ========== Inicio ========== -->
+  <section class="panel view" id="inicio">
+    <div class="home-grid">
+      <div class="map-col">
+        <label class="search">
+          <span class="icon i-search" aria-hidden="true"></span>
+          <input type="search" placeholder="Busca comida, postres…" aria-label="Buscar">
+        </label>
+        <div class="chips" aria-label="Ir a categoría">
+          <a class="chip" href="#categorias"><span class="icon-frame"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
+          <a class="chip" href="#cat-bebidas"><span class="icon-frame"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
+          <a class="chip" href="#cat-postres"><span class="icon-frame"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
+          <a class="chip" href="#cat-artesanias"><span class="icon-frame"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
+          <a class="chip" href="#cat-otros"><span class="icon-frame"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+        </div>
+        <div class="map-box" aria-label="Mapa">
+          <a class="pin" style="left:63%;top:30%" href="#detalle-helena" aria-label="Pasteles de Helena" title="Pasteles de Helena"></a>
+          <a class="pin" style="left:31%;top:60%" href="#detalle-lomo" aria-label="Lomo saltado" title="Lomo saltado"></a>
+          <a class="pin" style="left:74%;top:52%" href="#detalle-tacos" aria-label="Tacos de carne asada" title="Tacos de carne asada"></a>
+        </div>
+      </div>
+      <aside class="near">
+        <div class="near-title">Cerca de ti</div>
+        <ul class="near-list">
+          <li>
+            <div class="item-card">
+              <a class="thumb" href="#detalle-helena" aria-label="Ver Pasteles de Helena"></a>
+              <div>
+                <h3><a href="#detalle-helena">Pasteles de la señora Helena</a></h3>
+                <a class="price-tag" href="#detalle-helena">$ 4.500 →</a>
+                <div class="rate"><span class="icon i-star" aria-hidden="true"></span>4.6 (300)</div>
+              </div>
+              <label class="chat-btn has-dot" for="chat-helena" aria-label="Mensaje a Helena"><span class="icon i-chat" aria-hidden="true"></span></label>
+            </div>
+          </li>
+          <li>
+            <div class="item-card">
+              <a class="thumb" href="#detalle-lomo" aria-label="Ver Lomo saltado" style="background:#c4a070"></a>
+              <div>
+                <h3><a href="#detalle-lomo">Lomo saltado</a></h3>
+                <a class="price-tag" href="#detalle-lomo">$ 18.000 →</a>
+                <div class="rate"><span class="icon i-star" aria-hidden="true"></span>4.5 (300)</div>
+              </div>
+              <label class="chat-btn" for="chat-marco" aria-label="Mensaje a Don Marco"><span class="icon i-chat" aria-hidden="true"></span></label>
+            </div>
+          </li>
+          <li>
+            <div class="item-card">
+              <a class="thumb" href="#detalle-tacos" aria-label="Ver Tacos de carne asada" style="background:#b8895a"></a>
+              <div>
+                <h3><a href="#detalle-tacos">Tacos de carne asada</a></h3>
+                <a class="price-tag" href="#detalle-tacos">$ 14.000 →</a>
+                <div class="rate"><span class="icon i-star" aria-hidden="true"></span>4.0 (300)</div>
+              </div>
+              <label class="chat-btn" for="chat-rosa" aria-label="Mensaje a Doña Rosa"><span class="icon i-chat" aria-hidden="true"></span></label>
+            </div>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ========== Categorías (Comida, Bebidas, Postres, Artesanías, Otros) ========== -->
+  <section class="panel view view-cat" id="categorias">
+    <div class="banner">
+      <div class="banner-media" aria-hidden="true">
+        <span class="frame" style="background:#c4a070"></span>
+        <span class="frame" style="background:#b8895a"></span>
+        <span class="frame" style="background:#a67c52"></span>
+      </div>
+      <h2 class="banner-title">COMIDA</h2>
+    </div>
+    <div class="cat-row" aria-label="Elegir categoría">
+      <a class="cat is-on" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
+      <a class="cat" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
+      <a class="cat" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
+      <a class="cat" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
+      <a class="cat" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+    </div>
+    <div class="cards">
+      <a class="tile" href="#detalle-lomo">
+        <span class="tile-media" style="background:#c4a070"><!-- <img src="img/lomo.jpg" alt=""> --></span>
+        <span class="tile-caption">Lomo saltado</span>
+      </a>
+      <a class="tile" href="#detalle-tacos">
+        <span class="tile-media" style="background:#b8895a"><!-- <img src="img/tacos.jpg" alt=""> --></span>
+        <span class="tile-caption">Tacos de carne asada</span>
+      </a>
+    </div>
+  </section>
+  <section class="panel view view-cat" id="cat-bebidas">
+    <div class="banner">
+      <div class="banner-media" aria-hidden="true">
+        <span class="frame" style="background:#7a9e9f"></span>
+        <span class="frame" style="background:#5c7f80"></span>
+        <span class="frame" style="background:#8fb3b4"></span>
+      </div>
+      <h2 class="banner-title">BEBIDAS</h2>
+    </div>
+    <div class="cat-row" aria-label="Elegir categoría">
+      <a class="cat" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
+      <a class="cat is-on" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
+      <a class="cat" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
+      <a class="cat" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
+      <a class="cat" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+    </div>
+    <div class="empty-cat">
+      <b>Aún no hay bebidas</b>
+      <p>Cuando un vendedor publique algo en esta categoría, lo verás aquí.</p>
+    </div>
+  </section>
+  <section class="panel view view-cat" id="cat-postres">
+    <div class="banner">
+      <div class="banner-media" aria-hidden="true">
+        <span class="frame" style="background:#e8c4a8"></span>
+        <span class="frame" style="background:#d4a0b0"></span>
+        <span class="frame" style="background:#c9b89a"></span>
+      </div>
+      <h2 class="banner-title">POSTRES</h2>
+    </div>
+    <div class="cat-row" aria-label="Elegir categoría">
+      <a class="cat" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
+      <a class="cat" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
+      <a class="cat is-on" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
+      <a class="cat" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
+      <a class="cat" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+    </div>
+    <div class="cards">
+      <a class="tile" href="#detalle-helena">
+        <span class="tile-media" style="background:#e8c4a8"><!-- <img src="img/helena.jpg" alt=""> --></span>
+        <span class="tile-caption">Pasteles de la señora Helena</span>
+      </a>
+      <a class="tile" href="#detalle-mousse">
+        <span class="tile-media" style="background:#d4a0b0"><!-- <img src="img/mousse.jpg" alt=""> --></span>
+        <span class="tile-caption">Mousse de fresa y chocolate</span>
+      </a>
+      <a class="tile" href="#detalle-vasitos">
+        <span class="tile-media" style="background:#c9b89a"><!-- <img src="img/vasitos.jpg" alt=""> --></span>
+        <span class="tile-caption">Postres en vasito</span>
+      </a>
+    </div>
+  </section>
+  <section class="panel view view-cat" id="cat-artesanias">
+    <div class="banner">
+      <div class="banner-media" aria-hidden="true">
+        <span class="frame" style="background:#b89b7a"></span>
+        <span class="frame" style="background:#9a7b5c"></span>
+        <span class="frame" style="background:#c4a882"></span>
+      </div>
+      <h2 class="banner-title">ARTESANÍAS</h2>
+    </div>
+    <div class="cat-row" aria-label="Elegir categoría">
+      <a class="cat" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
+      <a class="cat" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
+      <a class="cat" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
+      <a class="cat is-on" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
+      <a class="cat" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+    </div>
+    <div class="empty-cat">
+      <b>Aún no hay artesanías</b>
+      <p>Cuando un vendedor publique algo en esta categoría, lo verás aquí.</p>
+    </div>
+  </section>
+  <section class="panel view view-cat" id="cat-otros">
+    <div class="banner">
+      <div class="banner-media" aria-hidden="true">
+        <span class="frame" style="background:#8a8a8a"></span>
+        <span class="frame" style="background:#6e6e6e"></span>
+        <span class="frame" style="background:#a0a0a0"></span>
+      </div>
+      <h2 class="banner-title">OTROS</h2>
+    </div>
+    <div class="cat-row" aria-label="Elegir categoría">
+      <a class="cat" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
+      <a class="cat" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
+      <a class="cat" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
+      <a class="cat" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
+      <a class="cat is-on" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+    </div>
+    <div class="empty-cat">
+      <b>Aún no hay otros productos</b>
+      <p>Cuando un vendedor publique algo en esta categoría, lo verás aquí.</p>
+    </div>
+  </section>
+
+  <!-- ========== Favoritos ========== -->
+  <section class="panel view" id="favoritos">
+    <h1 class="page-head">FAVORITOS</h1>
+    <ul class="rows">
+      <li>
+        <div class="row-card">
+          <a class="thumb" href="#detalle-helena" aria-label="Ver Pasteles de Helena"></a>
+          <div class="meta">
+            <h3><a href="#detalle-helena">Pasteles de la señora Helena</a></h3>
+            <div class="rate"><span class="icon i-star" aria-hidden="true"></span>4.6 (300) votos</div>
+          </div>
+          <label class="chat-btn has-dot" for="chat-helena" aria-label="Mensaje a Helena"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </li>
+      <li>
+        <div class="row-card">
+          <a class="thumb" href="#detalle-lomo" aria-label="Ver Lomo saltado" style="background:#c4a070"></a>
+          <div class="meta">
+            <h3><a href="#detalle-lomo">Lomo saltado</a></h3>
+            <div class="rate"><span class="icon i-star" aria-hidden="true"></span>4.5 (300) votos</div>
+          </div>
+          <label class="chat-btn" for="chat-marco" aria-label="Mensaje a Don Marco"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </li>
+      <li>
+        <div class="row-card">
+          <a class="thumb" href="#detalle-tacos" aria-label="Ver Tacos de carne asada" style="background:#b8895a"></a>
+          <div class="meta">
+            <h3><a href="#detalle-tacos">Tacos de carne asada</a></h3>
+            <div class="rate"><span class="icon i-star" aria-hidden="true"></span>4.0 (300) votos</div>
+          </div>
+          <label class="chat-btn" for="chat-rosa" aria-label="Mensaje a Doña Rosa"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </li>
+    </ul>
+    <label class="chat-fab" for="chat-helena">Chat <span class="icon i-send" aria-hidden="true"></span></label>
+  </section>
+
+  <!-- ========== Mis pedidos ========== -->
+  <section class="panel view" id="pedidos">
+    <h1 class="page-head">MIS PEDIDOS</h1>
+    <ul class="rows">
+      <li>
+        <a class="row-card" href="#detalle-tacos">
+          <span class="thumb" style="background:#b8895a"></span>
+          <div class="meta">
+            <h3>Tacos de carne asada</h3>
+            <small>Doña Rosa — $ 14.000</small>
+          </div>
+          <span class="status">En camino</span>
+        </a>
+      </li>
+      <li>
+        <a class="row-card" href="#detalle-helena">
+          <span class="thumb"></span>
+          <div class="meta">
+            <h3>Pasteles de la señora Helena</h3>
+            <small>Helena — $ 4.500</small>
+          </div>
+          <span class="status done">Entregado</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ========== Usuarios / Vendedores del barrio ========== -->
+  <section class="panel view" id="usuarios">
+    <h1 class="page-head">VENDEDORES DEL BARRIO</h1>
+    <ul class="rows">
+      <li>
+        <div class="row-card">
+          <a class="pic" href="#detalle-helena" aria-label="Ver productos de Helena"><span class="icon i-user" aria-hidden="true"></span></a>
+          <div class="meta">
+            <h3><a href="#detalle-helena">Helena</a></h3>
+            <small>1 producto</small>
+          </div>
+          <label class="chat-btn has-dot" for="chat-helena" aria-label="Mensaje a Helena"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </li>
+      <li>
+        <div class="row-card">
+          <a class="pic" href="#detalle-lomo" aria-label="Ver productos de Don Marco"><span class="icon i-user" aria-hidden="true"></span></a>
+          <div class="meta">
+            <h3><a href="#detalle-lomo">Don Marco</a></h3>
+            <small>1 producto</small>
+          </div>
+          <label class="chat-btn" for="chat-marco" aria-label="Mensaje a Don Marco"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </li>
+      <li>
+        <div class="row-card">
+          <a class="pic" href="#detalle-tacos" aria-label="Ver productos de Doña Rosa"><span class="icon i-user" aria-hidden="true"></span></a>
+          <div class="meta">
+            <h3><a href="#detalle-tacos">Doña Rosa</a></h3>
+            <small>1 producto</small>
+          </div>
+          <label class="chat-btn" for="chat-rosa" aria-label="Mensaje a Doña Rosa"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </li>
+      <li>
+        <div class="row-card">
+          <a class="pic" href="#detalle-mousse" aria-label="Ver productos de Dulces de la Catedral"><span class="icon i-user" aria-hidden="true"></span></a>
+          <div class="meta">
+            <h3><a href="#detalle-mousse">Dulces de la Catedral</a></h3>
+            <small>1 producto</small>
+          </div>
+          <label class="chat-btn" for="chat-catedral" aria-label="Mensaje a Dulces de la Catedral"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </li>
+      <li>
+        <div class="row-card">
+          <a class="pic" href="#detalle-vasitos" aria-label="Ver productos de Doña Luz"><span class="icon i-user" aria-hidden="true"></span></a>
+          <div class="meta">
+            <h3><a href="#detalle-vasitos">Doña Luz</a></h3>
+            <small>1 producto</small>
+          </div>
+          <label class="chat-btn" for="chat-luz" aria-label="Mensaje a Doña Luz"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ========== Configuración ========== -->
+  <section class="panel view" id="config">
+    <h1 class="page-head">CONFIGURACIÓN</h1>
+    <div class="cfg-stack">
+      <label class="cfg-row toggle-row">
+        <span>Avisarme de mensajes nuevos</span>
+        <input class="tog-notif" type="checkbox" checked>
+        <span class="toggle" aria-hidden="true"></span>
+      </label>
+      <div class="cfg-row">
+        <span>Perfil actual: <b>comprador</b></span>
+        <a class="btn-outline" href="#roles">Cambiar</a>
+      </div>
+      <!-- En tablet y escritorio "Usuarios" ya está en el menú -->
+      <a class="cfg-row mobile-only" href="#usuarios"><span>Vendedores del barrio</span><span>→</span></a>
+      <a class="btn-logout" href="#landing">Cerrar sesión</a>
+    </div>
+  </section>
+
+  <!-- ========== Detalles de producto ========== -->
+  <!-- Pasteles de la señora Helena (Helena) -->
+  <section class="panel view detail" id="detalle-helena">
+    <a class="close-x" href="#cat-postres" aria-label="Cerrar"><span class="icon i-close" aria-hidden="true"></span></a>
+    <div class="detail-main">
+      <div class="detail-img" aria-label="Imagen del producto"></div>
+      <div class="detail-info">
+        <div class="rate"><span class="icon i-star" aria-hidden="true"></span><b>4.6</b> (300) votos</div>
+        <div class="detail-card">
+          <h2>Pasteles de la señora Helena</h2>
+          <p>Pastel de gelatina con cubos de piña y crema chantilly, coronado con una cereza. Se hornea cada mañana.</p>
+          <div class="price">$ 4.500</div>
+          <label class="btn" for="tog-pedido-helena">Hacer pedido</label>
+        </div>
+        <div class="seller-bar">
+          <a class="pic" href="#usuarios" aria-label="Ver Helena en vendedores"><span class="icon i-user" aria-hidden="true"></span></a>
+          <a href="#usuarios"><span>Helena<small>Postres</small></span></a>
+          <label class="chat-btn" for="chat-helena" aria-label="Mensaje a Helena"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lomo saltado (Don Marco) -->
+  <section class="panel view detail" id="detalle-lomo">
+    <a class="close-x" href="#categorias" aria-label="Cerrar"><span class="icon i-close" aria-hidden="true"></span></a>
+    <div class="detail-main">
+      <div class="detail-img" style="background:#c4a070" aria-label="Imagen del producto"></div>
+      <div class="detail-info">
+        <div class="rate"><span class="icon i-star" aria-hidden="true"></span><b>4.5</b> (300) votos</div>
+        <div class="detail-card">
+          <h2>Lomo saltado</h2>
+          <p>Tiras de res salteadas con pimentón y cebolla, papas fritas y arroz blanco. Porción para una persona.</p>
+          <div class="price">$ 18.000</div>
+          <label class="btn" for="tog-pedido-marco">Hacer pedido</label>
+        </div>
+        <div class="seller-bar">
+          <a class="pic" href="#usuarios" aria-label="Ver Don Marco en vendedores"><span class="icon i-user" aria-hidden="true"></span></a>
+          <a href="#usuarios"><span>Don Marco<small>Comida</small></span></a>
+          <label class="chat-btn" for="chat-marco" aria-label="Mensaje a Don Marco"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tacos de carne asada (Doña Rosa) -->
+  <section class="panel view detail" id="detalle-tacos">
+    <a class="close-x" href="#categorias" aria-label="Cerrar"><span class="icon i-close" aria-hidden="true"></span></a>
+    <div class="detail-main">
+      <div class="detail-img" style="background:#b8895a" aria-label="Imagen del producto"></div>
+      <div class="detail-info">
+        <div class="rate"><span class="icon i-star" aria-hidden="true"></span><b>4.0</b> (300) votos</div>
+        <div class="detail-card">
+          <h2>Tacos de carne asada</h2>
+          <p>Tres tacos de maíz con carne asada, pico de gallo y limón, con guacamole de la casa.</p>
+          <div class="price">$ 14.000</div>
+          <label class="btn" for="tog-pedido-rosa">Hacer pedido</label>
+        </div>
+        <div class="seller-bar">
+          <a class="pic" href="#usuarios" aria-label="Ver Doña Rosa en vendedores"><span class="icon i-user" aria-hidden="true"></span></a>
+          <a href="#usuarios"><span>Doña Rosa<small>Comida</small></span></a>
+          <label class="chat-btn" for="chat-rosa" aria-label="Mensaje a Doña Rosa"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mousse de fresa y chocolate (Dulces de la Catedral) -->
+  <section class="panel view detail" id="detalle-mousse">
+    <a class="close-x" href="#cat-postres" aria-label="Cerrar"><span class="icon i-close" aria-hidden="true"></span></a>
+    <div class="detail-main">
+      <div class="detail-img" style="background:#d4a0b0" aria-label="Imagen del producto"></div>
+      <div class="detail-info">
+        <div class="rate"><span class="icon i-star" aria-hidden="true"></span><b>4.8</b> (212) votos</div>
+        <div class="detail-card">
+          <h2>Mousse de fresa y chocolate</h2>
+          <p>Vasitos de mousse de chocolate, fresa y vainilla sobre base de galleta. Se piden por unidades.</p>
+          <div class="price">$ 6.500</div>
+          <label class="btn" for="tog-pedido-catedral">Hacer pedido</label>
+        </div>
+        <div class="seller-bar">
+          <a class="pic" href="#usuarios" aria-label="Ver Dulces de la Catedral en vendedores"><span class="icon i-user" aria-hidden="true"></span></a>
+          <a href="#usuarios"><span>Dulces de la Catedral<small>Postres</small></span></a>
+          <label class="chat-btn" for="chat-catedral" aria-label="Mensaje a Dulces de la Catedral"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Postres en vasito (Doña Luz) -->
+  <section class="panel view detail" id="detalle-vasitos">
+    <a class="close-x" href="#cat-postres" aria-label="Cerrar"><span class="icon i-close" aria-hidden="true"></span></a>
+    <div class="detail-main">
+      <div class="detail-img" style="background:#c9b89a" aria-label="Imagen del producto"></div>
+      <div class="detail-info">
+        <div class="rate"><span class="icon i-star" aria-hidden="true"></span><b>4.4</b> (96) votos</div>
+        <div class="detail-card">
+          <h2>Postres en vasito</h2>
+          <p>Surtido de postres en vaso: tiramisú, natilla y mezclas de fruta con chocolate.</p>
+          <div class="price">$ 5.000</div>
+          <label class="btn" for="tog-pedido-luz">Hacer pedido</label>
+        </div>
+        <div class="seller-bar">
+          <a class="pic" href="#usuarios" aria-label="Ver Doña Luz en vendedores"><span class="icon i-user" aria-hidden="true"></span></a>
+          <a href="#usuarios"><span>Doña Luz<small>Postres</small></span></a>
+          <label class="chat-btn" for="chat-luz" aria-label="Mensaje a Doña Luz"><span class="icon i-chat" aria-hidden="true"></span></label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+</div>
+
+
+<!-- =====================================================================
+     OVERLAYS (chat y confirmación de pedido)
+     ===================================================================== -->
+<aside class="overlay overlay-chat overlay-chat-helena" role="dialog" aria-label="Chat con Helena">
+  <header>
+    <span>Helena</span>
+    <label class="close" for="chat-off" aria-label="Cerrar chat"><span class="icon i-close" aria-hidden="true"></span></label>
+  </header>
+  <div class="msgs">
+    <div class="bubble">Hola, hoy salen pasteles calientes a las 4. ¿Te guardo uno?</div>
+  </div>
+  <div class="chat-form">
+    <input type="text" placeholder="Escribe un mensaje" aria-label="Mensaje" readonly>
+    <span class="send" aria-hidden="true"><span class="icon i-send" aria-hidden="true"></span></span>
+  </div>
+</aside>
+
+<aside class="overlay overlay-chat overlay-chat-marco" role="dialog" aria-label="Chat con Don Marco">
+  <header>
+    <span>Don Marco</span>
+    <label class="close" for="chat-off" aria-label="Cerrar chat"><span class="icon i-close" aria-hidden="true"></span></label>
+  </header>
+  <div class="msgs">
+    <p class="msgs-empty">Aún no hay mensajes con Don Marco. Escribe el primero.</p>
+  </div>
+  <div class="chat-form">
+    <input type="text" placeholder="Escribe un mensaje" aria-label="Mensaje" readonly>
+    <span class="send" aria-hidden="true"><span class="icon i-send" aria-hidden="true"></span></span>
+  </div>
+</aside>
+
+<aside class="overlay overlay-chat overlay-chat-rosa" role="dialog" aria-label="Chat con Doña Rosa">
+  <header>
+    <span>Doña Rosa</span>
+    <label class="close" for="chat-off" aria-label="Cerrar chat"><span class="icon i-close" aria-hidden="true"></span></label>
+  </header>
+  <div class="msgs">
+    <p class="msgs-empty">Aún no hay mensajes con Doña Rosa. Escribe el primero.</p>
+  </div>
+  <div class="chat-form">
+    <input type="text" placeholder="Escribe un mensaje" aria-label="Mensaje" readonly>
+    <span class="send" aria-hidden="true"><span class="icon i-send" aria-hidden="true"></span></span>
+  </div>
+</aside>
+
+<aside class="overlay overlay-chat overlay-chat-catedral" role="dialog" aria-label="Chat con Dulces de la Catedral">
+  <header>
+    <span>Dulces de la Catedral</span>
+    <label class="close" for="chat-off" aria-label="Cerrar chat"><span class="icon i-close" aria-hidden="true"></span></label>
+  </header>
+  <div class="msgs">
+    <p class="msgs-empty">Aún no hay mensajes con Dulces de la Catedral. Escribe el primero.</p>
+  </div>
+  <div class="chat-form">
+    <input type="text" placeholder="Escribe un mensaje" aria-label="Mensaje" readonly>
+    <span class="send" aria-hidden="true"><span class="icon i-send" aria-hidden="true"></span></span>
+  </div>
+</aside>
+
+<aside class="overlay overlay-chat overlay-chat-luz" role="dialog" aria-label="Chat con Doña Luz">
+  <header>
+    <span>Doña Luz</span>
+    <label class="close" for="chat-off" aria-label="Cerrar chat"><span class="icon i-close" aria-hidden="true"></span></label>
+  </header>
+  <div class="msgs">
+    <p class="msgs-empty">Aún no hay mensajes con Doña Luz. Escribe el primero.</p>
+  </div>
+  <div class="chat-form">
+    <input type="text" placeholder="Escribe un mensaje" aria-label="Mensaje" readonly>
+    <span class="send" aria-hidden="true"><span class="icon i-send" aria-hidden="true"></span></span>
+  </div>
+</aside>
+
+<div class="overlay overlay-pedido overlay-pedido-helena" role="status"><span class="toast">Pedido enviado a Helena</span></div>
+<div class="overlay overlay-pedido overlay-pedido-marco" role="status"><span class="toast">Pedido enviado a Don Marco</span></div>
+<div class="overlay overlay-pedido overlay-pedido-rosa" role="status"><span class="toast">Pedido enviado a Doña Rosa</span></div>
+<div class="overlay overlay-pedido overlay-pedido-catedral" role="status"><span class="toast">Pedido enviado a Dulces de la Catedral</span></div>
+<div class="overlay overlay-pedido overlay-pedido-luz" role="status"><span class="toast">Pedido enviado a Doña Luz</span></div>
+
+<!-- Toast: se oculta solo a los 3 s (mínimo JS, solo para poder pedir otra vez) -->
+<script>
+(function () {
+  ["helena", "marco", "rosa", "catedral", "luz"].forEach(function (s) {
+    var el = document.getElementById("tog-pedido-" + s);
+    if (!el) return;
+    el.addEventListener("change", function () {
+      if (!el.checked) return;
+      clearTimeout(el._hideTimer);
+      el._hideTimer = setTimeout(function () { el.checked = false; }, 3000);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
