@@ -10,9 +10,30 @@
   const CONFIG = {
     apiKey: 'AIzaSyB7gfMzNQ-mZyyrI8jW8HUSJ9ehyuLOX8w', // <-- CONFIGURAR
     mapId: '',                       // Opcional: ID de mapa de Google Cloud
-    centro: { lat: 4.861, lng: -74.033 }, // Chía, Cundinamarca
+    centro: { lat: 4.6830671, lng: -74.0419653 },
     zoom: 14,
   };
+
+  // Paleta retro de BITALL en azules, verdes y grises fríos.
+  const ESTILO_RETRO = [
+    { elementType: 'geometry', stylers: [{ color: '#F2F6F7' }] },
+    { elementType: 'labels.text.fill', stylers: [{ color: '#405665' }] },
+    { elementType: 'labels.text.stroke', stylers: [{ color: '#F2F6F7' }] },
+    { featureType: 'administrative', elementType: 'geometry.stroke', stylers: [{ color: '#B5C5CF' }] },
+    { featureType: 'landscape.man_made', elementType: 'geometry.fill', stylers: [{ color: '#E1E8ED' }] },
+    { featureType: 'landscape.man_made', elementType: 'geometry.stroke', stylers: [{ color: '#CAD6DE' }] },
+    { featureType: 'landscape.natural.landcover', elementType: 'geometry.fill', stylers: [{ color: '#C5DFC0' }] },
+    { featureType: 'poi', elementType: 'geometry.fill', stylers: [{ color: '#E1E8ED' }] },
+    { featureType: 'poi.park', elementType: 'geometry.fill', stylers: [{ color: '#A8C9A0' }] },
+    { featureType: 'road', elementType: 'geometry.fill', stylers: [{ color: '#D4DFE6' }] },
+    { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#BBCBD5' }] },
+    { featureType: 'road.arterial', elementType: 'geometry.fill', stylers: [{ color: '#FFFFFF' }] },
+    { featureType: 'road.highway', elementType: 'geometry.fill', stylers: [{ color: '#8BB8D0' }] },
+    { featureType: 'road.highway', elementType: 'geometry.stroke', stylers: [{ color: '#719CB4' }] },
+    { featureType: 'transit.line', elementType: 'geometry', stylers: [{ color: '#B5C5CF' }] },
+    { featureType: 'transit.station', elementType: 'geometry.fill', stylers: [{ color: '#E1E8ED' }] },
+    { featureType: 'water', elementType: 'geometry.fill', stylers: [{ color: '#A9D6E5' }] },
+  ];
 
   const panel = document.getElementById('inicio');
   const contenedor = document.getElementById('google-map');
@@ -67,7 +88,7 @@
       informar('Configura tu API Key de Google Maps en mapa.js para mostrar el mapa.');
       return;
     }
-    informar('Cargando mapa de Chía…');
+    informar('Cargando mapa');
     inicializacion = (async () => {
       prepararGoogleMaps();
       const { Map } = await google.maps.importLibrary('maps');
@@ -75,7 +96,7 @@
       mapa = new Map(contenedor, {
         center: CONFIG.centro,
         zoom: CONFIG.zoom,
-        ...(CONFIG.mapId ? { mapId: CONFIG.mapId } : {}),
+        ...(CONFIG.mapId ? { mapId: CONFIG.mapId } : { styles: ESTILO_RETRO }),
         zoomControl: true,
         streetViewControl: true,
         fullscreenControl: true,
