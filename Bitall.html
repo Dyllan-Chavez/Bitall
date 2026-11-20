@@ -28,9 +28,9 @@
 
 <!-- ========== Landing ========== -->
 <section class="panel public" id="landing">
-  <div class="landing-hero"><div class="landing-art" aria-hidden="true"></div></div>
+  <div class="landing-hero"><img class="landing-art" src="assets/illustrations/landing-art.png" alt="" aria-hidden="true"></div>
   <div class="landing-actions">
-    <div class="logo"><span class="logo-mark" aria-hidden="true"></span>Bitall</div>
+    <div class="logo"><img class="logo-mark" src="assets/branding/logo-bitall.svg" alt="BITALL"></div>
     <a class="btn" href="#registro">Comenzar</a>
     <a class="btn btn-white" href="#login">Iniciar sesión</a>
   </div>
@@ -40,7 +40,7 @@
 <section class="panel public" id="login">
   <a class="back-link mobile-only" href="#landing"><span class="icon i-back" aria-hidden="true"></span> Volver</a>
   <form class="auth-card" action="#inicio" method="get">
-    <a class="logo" href="#landing"><span class="logo-mark" aria-hidden="true"></span>Bitall</a>
+    <a class="logo" href="#landing"><img class="logo-mark" src="assets/branding/logo-bitall.svg" alt="BITALL"></a>
     <div class="auth-row">
       <label for="login-nombre">Nombre</label>
       <input id="login-nombre" name="nombre" autocomplete="username">
@@ -58,7 +58,7 @@
 <section class="panel public" id="registro">
   <a class="back-link mobile-only" href="#landing"><span class="icon i-back" aria-hidden="true"></span> Volver</a>
   <form class="auth-card" action="#roles" method="get">
-    <a class="logo" href="#landing"><span class="logo-mark" aria-hidden="true"></span>Bitall</a>
+    <a class="logo" href="#landing"><img class="logo-mark" src="assets/branding/logo-bitall.svg" alt="BITALL"></a>
     <div class="auth-row">
       <label for="reg-nombre">Nombre</label>
       <input id="reg-nombre" name="nombre" autocomplete="name">
@@ -78,21 +78,22 @@
 
 <!-- ========== Roles: Usuario / Vendedor ========== -->
 <section class="panel public" id="roles">
-  <div class="roles-grid">
+  <div class="roles-content">
+    <img class="role-bunny" src="assets/illustrations/role-bunny.svg" alt="" aria-hidden="true">
+    <div class="roles-grid">
     <a class="role-card" href="#inicio">
-      <span class="role-bun" aria-hidden="true"></span>
       <h2>Usuario</h2>
       <p class="hide-mobile">Encuentra productos y negocios cerca de ti de una manera fácil y rápida. Explora diferentes categorías, consulta precios, revisa opiniones y descubre nuevos lugares. También puedes guardar tus favoritos, contactar con vendedores y realizar pedidos para recogerlos o recibirlos a domicilio.</p>
       <p class="mobile-only">Encuentra productos y negocios cerca de ti. Explora categorías, precios, opiniones y haz pedidos.</p>
       <span class="btn">Entrar como comprador</span>
     </a>
     <a class="role-card" href="#inicio">
-      <span class="role-bun" aria-hidden="true"></span>
       <h2>Vendedor</h2>
       <p class="hide-mobile">Da a conocer tu negocio y llega a más personas cerca de ti. Publica tus productos, precios, fotos y disponibilidad, administra tu inventario y recibe pedidos. También puedes actualizar la información de tu negocio y mantener contacto directo con tus clientes.</p>
       <p class="mobile-only">Publica productos, administra pedidos y mantén contacto con tus clientes del barrio.</p>
       <span class="btn">Entrar como vendedor</span>
     </a>
+    </div>
   </div>
   <a class="back-fab" href="#registro" aria-label="Volver"><span class="icon i-back" aria-hidden="true"></span><span class="back-text">Volver</span></a>
 </section>
@@ -107,7 +108,7 @@
 
   <!-- Topbar: solo se ve en móvil -->
   <header class="topbar">
-    <a class="logo" href="#inicio"><span class="logo-mark" aria-hidden="true"></span>Bitall</a>
+    <a class="logo" href="#inicio"><img class="logo-mark" src="assets/branding/logo-bitall.svg" alt="BITALL"></a>
     <div class="actions">
       <a class="icon-btn" href="#usuarios" aria-label="Vendedores"><span class="icon i-user" aria-hidden="true"></span></a>
       <label class="icon-btn" for="chat-helena" aria-label="Mensajes"><span class="icon i-chat" aria-hidden="true"></span></label>
@@ -116,7 +117,7 @@
 
   <!-- Menú: barra inferior (móvil) / riel (tablet) / sidebar (escritorio) -->
   <nav class="sidebar" aria-label="Principal">
-    <a class="logo" href="#inicio"><span class="logo-mark" aria-hidden="true"></span><span class="logo-text">Bitall</span></a>
+    <a class="logo" href="#inicio"><img class="logo-mark" src="assets/branding/logo-bitall.svg" alt="BITALL"></a>
     <div class="nav">
       <a class="nb" href="#inicio"><span class="icon i-home" aria-hidden="true"></span><span>Inicio</span></a>
       <a class="nb nb-extra" href="#categorias"><span class="icon i-grid" aria-hidden="true"></span><span>Categorías</span></a>
@@ -138,16 +139,15 @@
           <input type="search" placeholder="Busca comida, postres…" aria-label="Buscar">
         </label>
         <div class="chips" aria-label="Ir a categoría">
-          <a class="chip" href="#categorias"><span class="icon-frame"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
-          <a class="chip" href="#cat-bebidas"><span class="icon-frame"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
-          <a class="chip" href="#cat-postres"><span class="icon-frame"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
-          <a class="chip" href="#cat-artesanias"><span class="icon-frame"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
-          <a class="chip" href="#cat-otros"><span class="icon-frame"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+          <a class="chip" href="#categorias"><span class="icon-frame"><img class="category-art" src="assets/icons/icon-comida.svg" alt="" aria-hidden="true"></span>Comida</a>
+          <a class="chip" href="#cat-bebidas"><span class="icon-frame"><img class="category-art" src="assets/icons/icon-bebidas.svg" alt="" aria-hidden="true"></span>Bebidas</a>
+          <a class="chip" href="#cat-postres"><span class="icon-frame"><img class="category-art" src="assets/icons/icon-postres.svg" alt="" aria-hidden="true"></span>Postres</a>
+          <a class="chip" href="#cat-artesanias"><span class="icon-frame"><img class="category-art" src="assets/icons/icon-artesanias.svg" alt="" aria-hidden="true"></span>Artesanías</a>
+          <a class="chip" href="#cat-otros"><span class="icon-frame"><img class="category-art" src="assets/icons/icon-otros.svg" alt="" aria-hidden="true"></span>Otros</a>
         </div>
-        <div class="map-box" aria-label="Mapa">
-          <a class="pin" style="left:63%;top:30%" href="#detalle-helena" aria-label="Pasteles de Helena" title="Pasteles de Helena"></a>
-          <a class="pin" style="left:31%;top:60%" href="#detalle-lomo" aria-label="Lomo saltado" title="Lomo saltado"></a>
-          <a class="pin" style="left:74%;top:52%" href="#detalle-tacos" aria-label="Tacos de carne asada" title="Tacos de carne asada"></a>
+        <div class="map-box" aria-label="Mapa interactivo de Chía, Cundinamarca">
+          <div id="google-map" class="google-map" role="region" aria-label="Mapa interactivo de Chía"></div>
+          <p id="map-status" class="map-status" role="status">El mapa se cargará al abrir Inicio.</p>
         </div>
       </div>
       <aside class="near">
@@ -202,11 +202,11 @@
       <h2 class="banner-title">COMIDA</h2>
     </div>
     <div class="cat-row" aria-label="Elegir categoría">
-      <a class="cat is-on" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
-      <a class="cat" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
-      <a class="cat" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
-      <a class="cat" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
-      <a class="cat" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+      <a class="cat is-on" href="#categorias"><span class="box"><img class="category-art" src="assets/icons/icon-comida.svg" alt="" aria-hidden="true"></span>Comida</a>
+      <a class="cat" href="#cat-bebidas"><span class="box"><img class="category-art" src="assets/icons/icon-bebidas.svg" alt="" aria-hidden="true"></span>Bebidas</a>
+      <a class="cat" href="#cat-postres"><span class="box"><img class="category-art" src="assets/icons/icon-postres.svg" alt="" aria-hidden="true"></span>Postres</a>
+      <a class="cat" href="#cat-artesanias"><span class="box"><img class="category-art" src="assets/icons/icon-artesanias.svg" alt="" aria-hidden="true"></span>Artesanías</a>
+      <a class="cat" href="#cat-otros"><span class="box"><img class="category-art" src="assets/icons/icon-otros.svg" alt="" aria-hidden="true"></span>Otros</a>
     </div>
     <div class="cards">
       <a class="tile" href="#detalle-lomo">
@@ -229,11 +229,11 @@
       <h2 class="banner-title">BEBIDAS</h2>
     </div>
     <div class="cat-row" aria-label="Elegir categoría">
-      <a class="cat" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
-      <a class="cat is-on" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
-      <a class="cat" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
-      <a class="cat" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
-      <a class="cat" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+      <a class="cat" href="#categorias"><span class="box"><img class="category-art" src="assets/icons/icon-comida.svg" alt="" aria-hidden="true"></span>Comida</a>
+      <a class="cat is-on" href="#cat-bebidas"><span class="box"><img class="category-art" src="assets/icons/icon-bebidas.svg" alt="" aria-hidden="true"></span>Bebidas</a>
+      <a class="cat" href="#cat-postres"><span class="box"><img class="category-art" src="assets/icons/icon-postres.svg" alt="" aria-hidden="true"></span>Postres</a>
+      <a class="cat" href="#cat-artesanias"><span class="box"><img class="category-art" src="assets/icons/icon-artesanias.svg" alt="" aria-hidden="true"></span>Artesanías</a>
+      <a class="cat" href="#cat-otros"><span class="box"><img class="category-art" src="assets/icons/icon-otros.svg" alt="" aria-hidden="true"></span>Otros</a>
     </div>
     <div class="empty-cat">
       <b>Aún no hay bebidas</b>
@@ -250,11 +250,11 @@
       <h2 class="banner-title">POSTRES</h2>
     </div>
     <div class="cat-row" aria-label="Elegir categoría">
-      <a class="cat" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
-      <a class="cat" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
-      <a class="cat is-on" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
-      <a class="cat" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
-      <a class="cat" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+      <a class="cat" href="#categorias"><span class="box"><img class="category-art" src="assets/icons/icon-comida.svg" alt="" aria-hidden="true"></span>Comida</a>
+      <a class="cat" href="#cat-bebidas"><span class="box"><img class="category-art" src="assets/icons/icon-bebidas.svg" alt="" aria-hidden="true"></span>Bebidas</a>
+      <a class="cat is-on" href="#cat-postres"><span class="box"><img class="category-art" src="assets/icons/icon-postres.svg" alt="" aria-hidden="true"></span>Postres</a>
+      <a class="cat" href="#cat-artesanias"><span class="box"><img class="category-art" src="assets/icons/icon-artesanias.svg" alt="" aria-hidden="true"></span>Artesanías</a>
+      <a class="cat" href="#cat-otros"><span class="box"><img class="category-art" src="assets/icons/icon-otros.svg" alt="" aria-hidden="true"></span>Otros</a>
     </div>
     <div class="cards">
       <a class="tile" href="#detalle-helena">
@@ -281,11 +281,11 @@
       <h2 class="banner-title">ARTESANÍAS</h2>
     </div>
     <div class="cat-row" aria-label="Elegir categoría">
-      <a class="cat" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
-      <a class="cat" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
-      <a class="cat" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
-      <a class="cat is-on" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
-      <a class="cat" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+      <a class="cat" href="#categorias"><span class="box"><img class="category-art" src="assets/icons/icon-comida.svg" alt="" aria-hidden="true"></span>Comida</a>
+      <a class="cat" href="#cat-bebidas"><span class="box"><img class="category-art" src="assets/icons/icon-bebidas.svg" alt="" aria-hidden="true"></span>Bebidas</a>
+      <a class="cat" href="#cat-postres"><span class="box"><img class="category-art" src="assets/icons/icon-postres.svg" alt="" aria-hidden="true"></span>Postres</a>
+      <a class="cat is-on" href="#cat-artesanias"><span class="box"><img class="category-art" src="assets/icons/icon-artesanias.svg" alt="" aria-hidden="true"></span>Artesanías</a>
+      <a class="cat" href="#cat-otros"><span class="box"><img class="category-art" src="assets/icons/icon-otros.svg" alt="" aria-hidden="true"></span>Otros</a>
     </div>
     <div class="empty-cat">
       <b>Aún no hay artesanías</b>
@@ -302,11 +302,11 @@
       <h2 class="banner-title">OTROS</h2>
     </div>
     <div class="cat-row" aria-label="Elegir categoría">
-      <a class="cat" href="#categorias"><span class="box"><span class="icon i-bag" aria-hidden="true"></span></span>Comida</a>
-      <a class="cat" href="#cat-bebidas"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Bebidas</a>
-      <a class="cat" href="#cat-postres"><span class="box"><span class="icon i-heart" aria-hidden="true"></span></span>Postres</a>
-      <a class="cat" href="#cat-artesanias"><span class="box"><span class="icon i-user" aria-hidden="true"></span></span>Artesanías</a>
-      <a class="cat is-on" href="#cat-otros"><span class="box"><span class="icon i-grid" aria-hidden="true"></span></span>Otros</a>
+      <a class="cat" href="#categorias"><span class="box"><img class="category-art" src="assets/icons/icon-comida.svg" alt="" aria-hidden="true"></span>Comida</a>
+      <a class="cat" href="#cat-bebidas"><span class="box"><img class="category-art" src="assets/icons/icon-bebidas.svg" alt="" aria-hidden="true"></span>Bebidas</a>
+      <a class="cat" href="#cat-postres"><span class="box"><img class="category-art" src="assets/icons/icon-postres.svg" alt="" aria-hidden="true"></span>Postres</a>
+      <a class="cat" href="#cat-artesanias"><span class="box"><img class="category-art" src="assets/icons/icon-artesanias.svg" alt="" aria-hidden="true"></span>Artesanías</a>
+      <a class="cat is-on" href="#cat-otros"><span class="box"><img class="category-art" src="assets/icons/icon-otros.svg" alt="" aria-hidden="true"></span>Otros</a>
     </div>
     <div class="empty-cat">
       <b>Aún no hay otros productos</b>
@@ -664,5 +664,6 @@
 })();
 </script>
 
+<script src="mapa.js" defer></script>
 </body>
 </html>
